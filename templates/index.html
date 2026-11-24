@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>Need blood urgently?</h1>
+  <p>Find available donors in your city in seconds.</p>
+  <form action="{{ url_for('search') }}" method="get" class="card">
+    <label>Blood group needed
+      <select name="group" required>
+        <option value="">Select</option>
+        {% for g in groups %}<option>{{ g }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>City
+      <input type="text" name="city" placeholder="e.g. Salem" required>
+    </label>
+    <button type="submit">Search Donors</button>
+  </form>
+</section>
+<section class="stats">
+  <div><strong>{{ total }}</strong><span>Registered donors</span></div>
+  <div><strong>{{ ready }}</strong><span>Ready to donate now</span></div>
+</section>
+<p class="center">Healthy and 18+? <a href="{{ url_for('register') }}">Register as a donor</a> and help save a life.</p>
+{% endblock %}

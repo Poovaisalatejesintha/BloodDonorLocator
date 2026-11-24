@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Become a Donor{% endblock %}
+{% block content %}
+<h2>Become a donor</h2>
+<form method="post" class="card">
+  <label>Full name <input type="text" name="name" required></label>
+  <label>Blood group
+    <select name="blood_group" required>
+      <option value="">Select</option>
+      {% for g in groups %}<option>{{ g }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Phone (10 digits) <input type="tel" name="phone" required></label>
+  <label>City <input type="text" name="city" required></label>
+  <label>Create a 4-digit PIN <input type="password" name="pin" maxlength="4" inputmode="numeric" required></label>
+  <p class="muted">You will use your phone number and PIN to update your availability. Your name, group and phone are shown to people searching for blood.</p>
+  <button type="submit">Register</button>
+</form>
+{% endblock %}

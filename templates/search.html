@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Donors for {{ group }} in {{ city|title }}</h2>
+{% if donors %}
+  <p class="muted">{{ donors|length }} available donor(s). Exact matches are shown first.</p>
+  {% for d in donors %}
+  <div class="card donor">
+    <div>
+      <h3>{{ d.name }}</h3>
+      <span class="badge">{{ d.blood_group }}</span>
+      {% if d.exact %}<span class="tag">Exact match</span>{% endif %}
+    </div>
+    <div class="actions">
+      <a class="btn" href="tel:{{ d.phone }}">Call {{ d.phone }}</a>
+      <a class="btn green" href="https://wa.me/{{ d.wa }}" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+  {% endfor %}
+{% else %}
+  <div class="card">
+    <p>No available donors found right now.</p>
+    <p class="muted">Try a nearby city, and contact the nearest hospital blood bank at the same time.</p>
+  </div>
+{% endif %}
+<p><a href="{{ url_for('index') }}">&larr; New search</a></p>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}My Status{% endblock %}
+{% block content %}
+<h2>Hello, {{ donor.name }}</h2>
+<div class="card">
+  <p>Blood group: <span class="badge">{{ donor.blood_group }}</span> &middot; City: {{ donor.city }}</p>
+  <p>Status:
+    {% if not donor.available %}<strong class="red">Unavailable</strong>
+    {% elif next_date %}<strong class="orange">Resting until {{ next_date.strftime('%d %b %Y') }}</strong>
+    {% else %}<strong class="green-text">Available</strong>{% endif %}
+  </p>
+  <p>Last donated: {{ donor.last_donated or 'Not recorded' }}</p>
+  <div class="actions">
+    <form action="{{ url_for('toggle') }}" method="post">
+      <button type="submit">{{ 'Mark me Unavailable' if donor.available else 'Mark me Available' }}</button>
+    </form>
+    <form action="{{ url_for('donated') }}" method="post">
+      <button type="submit" class="green">I donated today</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
